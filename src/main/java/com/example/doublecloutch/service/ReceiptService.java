@@ -34,4 +34,28 @@ public class ReceiptService {
     public Receipt getReceiptById(Long id) {
         return receiptRepository.findById(id).orElse(null);
     }
+
+    public int getLastReceiptNumber() {
+        Integer lastReceiptNumber = receiptRepository.findMaxReceiptNumber();
+        return lastReceiptNumber != null ? lastReceiptNumber : 0;
+    }
+
+    public Receipt updateReceipt(Long id, Receipt updatedReceipt) {
+        Receipt receipt = getReceiptById(id);
+        if (receipt != null) {
+            receipt.setUser(updatedReceipt.getUser());
+            receipt.setMaterial(updatedReceipt.getMaterial());
+            receipt.setDescription(updatedReceipt.getDescription());
+            receipt.setUnitPrice(updatedReceipt.getUnitPrice());
+            receipt.setQuantity(updatedReceipt.getQuantity());
+            receipt.setTotalPrice(updatedReceipt.getUnitPrice() * updatedReceipt.getQuantity());
+            receipt.setReceiptNumber(updatedReceipt.getReceiptNumber());
+            receipt.setPaymentType(updatedReceipt.getPaymentType());
+            receipt.setDate(new Date());
+            receipt.setAmount(updatedReceipt.getAmount());
+            receipt.setDueDate(updatedReceipt.getDueDate());
+            return receiptRepository.save(receipt);
+        }
+        return null;
+    }
 }

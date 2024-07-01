@@ -16,6 +16,8 @@ public class ReceiptDTO {
     private String receiptNumber;
     private String paymentType;
     private Date date;
+    private double amount;
+    private Date dueDate;
 
     // Getters and Setters
     public Long getId() {
@@ -96,5 +98,21 @@ public class ReceiptDTO {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 }

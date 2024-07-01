@@ -1,9 +1,7 @@
 package com.example.doublecloutch.controller;
 
 import com.example.doublecloutch.dto.ReceiptDTO;
-import com.example.doublecloutch.entity.Material;
 import com.example.doublecloutch.entity.Receipt;
-import com.example.doublecloutch.entity.User;
 import com.example.doublecloutch.service.MaterialService;
 import com.example.doublecloutch.service.ReceiptService;
 import com.example.doublecloutch.service.UserService;
@@ -39,6 +37,12 @@ public class ReceiptController {
         return convertToDTO(receiptService.saveReceipt(receipt));
     }
 
+    @PutMapping("/{id}")
+    public ReceiptDTO updateReceipt(@PathVariable Long id, @RequestBody ReceiptDTO receiptDTO) {
+        Receipt receipt = convertToEntity(receiptDTO);
+        return convertToDTO(receiptService.updateReceipt(id, receipt));
+    }
+
     @DeleteMapping("/{id}")
     public void deleteReceipt(@PathVariable Long id) {
         receiptService.deleteReceipt(id);
@@ -47,6 +51,11 @@ public class ReceiptController {
     @GetMapping("/{id}")
     public ReceiptDTO getReceiptById(@PathVariable Long id) {
         return convertToDTO(receiptService.getReceiptById(id));
+    }
+
+    @GetMapping("/last-receipt-number")
+    public int getLastReceiptNumber() {
+        return receiptService.getLastReceiptNumber();
     }
 
     private ReceiptDTO convertToDTO(Receipt receipt) {
@@ -61,6 +70,8 @@ public class ReceiptController {
         dto.setReceiptNumber(receipt.getReceiptNumber());
         dto.setPaymentType(receipt.getPaymentType());
         dto.setDate(receipt.getDate());
+        dto.setAmount(receipt.getAmount());
+        dto.setDueDate(receipt.getDueDate());
         return dto;
     }
 
@@ -80,6 +91,8 @@ public class ReceiptController {
         receipt.setReceiptNumber(dto.getReceiptNumber());
         receipt.setPaymentType(dto.getPaymentType());
         receipt.setDate(dto.getDate());
+        receipt.setAmount(dto.getAmount());
+        receipt.setDueDate(dto.getDueDate());
         return receipt;
     }
 }
