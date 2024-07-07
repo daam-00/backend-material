@@ -72,6 +72,21 @@ public class ReceiptController {
         dto.setDate(receipt.getDate());
         dto.setAmount(receipt.getAmount());
         dto.setDueDate(receipt.getDueDate());
+
+        // Aggiungi i nuovi campi opzionali con controllo null
+        dto.setAmount2(receipt.getAmount2() != null ? receipt.getAmount2() : 0.0);
+        dto.setDueDate2(receipt.getDueDate2());
+        dto.setPaymentType2(receipt.getPaymentType2());
+        dto.setAmount3(receipt.getAmount3() != null ? receipt.getAmount3() : 0.0);
+        dto.setDueDate3(receipt.getDueDate3());
+        dto.setPaymentType3(receipt.getPaymentType3());
+        dto.setAmount4(receipt.getAmount4() != null ? receipt.getAmount4() : 0.0);
+        dto.setDueDate4(receipt.getDueDate4());
+        dto.setPaymentType4(receipt.getPaymentType4());
+        dto.setAmount5(receipt.getAmount5() != null ? receipt.getAmount5() : 0.0);
+        dto.setDueDate5(receipt.getDueDate5());
+        dto.setPaymentType5(receipt.getPaymentType5());
+
         return dto;
     }
 
@@ -93,6 +108,21 @@ public class ReceiptController {
         receipt.setDate(dto.getDate());
         receipt.setAmount(dto.getAmount());
         receipt.setDueDate(dto.getDueDate());
+
+        // Aggiungi i nuovi campi opzionali
+        receipt.setAmount2(dto.getAmount2() != null ? dto.getAmount2() : 0.0);
+        receipt.setDueDate2(dto.getDueDate2());
+        receipt.setPaymentType2(dto.getPaymentType2());
+        receipt.setAmount3(dto.getAmount3() != null ? dto.getAmount3() : 0.0);
+        receipt.setDueDate3(dto.getDueDate3());
+        receipt.setPaymentType3(dto.getPaymentType3());
+        receipt.setAmount4(dto.getAmount4() != null ? dto.getAmount4() : 0.0);
+        receipt.setDueDate4(dto.getDueDate4());
+        receipt.setPaymentType4(dto.getPaymentType4());
+        receipt.setAmount5(dto.getAmount5() != null ? dto.getAmount5() : 0.0);
+        receipt.setDueDate5(dto.getDueDate5());
+        receipt.setPaymentType5(dto.getPaymentType5());
+
         return receipt;
     }
 }

@@ -39,22 +39,24 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        Optional<User> optionalUser = userService.findById(id);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            user.setFirstName(userDetails.getFirstName());
-            user.setLastName(userDetails.getLastName());
-            user.setBirthDate(userDetails.getBirthDate());
-            user.setBirthPlace(userDetails.getBirthPlace());
-            user.setResidenza(userDetails.getResidenza());
+public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    Optional<User> optionalUser = userService.findById(id);
+    if (optionalUser.isPresent()) {
+        User user = optionalUser.get();
+        user.setFirstName(userDetails.getFirstName());
+        user.setLastName(userDetails.getLastName());
+        user.setBirthDate(userDetails.getBirthDate());
+        user.setBirthPlace(userDetails.getBirthPlace());
+        user.setResidenza(userDetails.getResidenza());
+        user.setCodiceFiscale(userDetails.getCodiceFiscale()); // Update codiceFiscale
 
-            User updatedUser = userService.save(user);
-            return ResponseEntity.ok(updatedUser);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        User updatedUser = userService.save(user);
+        return ResponseEntity.ok(updatedUser);
+    } else {
+        return ResponseEntity.notFound().build();
     }
+}
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
